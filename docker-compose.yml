@@ -26,12 +26,24 @@ services:
     image: nginx:latest
     container_name: digitalboost_nginx
     ports:
-      - "9001:80"
+      - "9005:80"
     volumes:
       - .:/var/www/html
       - ./default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
+      - db
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: digitalboost_phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "8080:80"
+    depends_on:
       - db
     restart: unless-stopped
 
