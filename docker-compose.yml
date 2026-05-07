@@ -41,10 +41,20 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: rootpassword
-    ports:
-      - "8080:80"
+      PMA_ABSOLUTE_URI: https://digital-marketing.demos.co.id/phpmyadmin/
     depends_on:
       - db
+    restart: unless-stopped
+
+  filemanager:
+    image: filebrowser/filebrowser:latest
+    container_name: digitalboost_filemanager
+    user: 1000:1000
+    volumes:
+      - .:/srv
+      - ./filemanager.db:/database.db
+    environment:
+      - FB_BASEURL=/filemanager
     restart: unless-stopped
 
 volumes:
