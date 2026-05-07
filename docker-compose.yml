@@ -49,13 +49,11 @@ services:
   filemanager:
     image: filebrowser/filebrowser:latest
     container_name: digitalboost_filemanager
+    user: 0:0
     volumes:
       - .:/srv
       - ./filemanager.db:/database/filebrowser.db
-      - ./filebrowser_settings.json:/config/settings.json
-    environment:
-      - FB_BASEURL=/filemanager
-      - FB_PORT=8080
+    command: ["--baseurl", "/filemanager", "--port", "8080", "--address", "0.0.0.0"]
     restart: unless-stopped
 
 volumes:
