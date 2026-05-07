@@ -53,7 +53,7 @@ services:
     volumes:
       - .:/srv
       - filebrowser_data:/database
-      - ./.filebrowser.json:/.filebrowser.json
+      - ./.filebrowser.json:/config/settings.json
     restart: unless-stopped
 
 volumes:
