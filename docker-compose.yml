@@ -52,9 +52,10 @@ services:
     user: 0:0
     volumes:
       - .:/srv
-      - ./filemanager.db:/database/filebrowser.db
-    command: ["--baseurl", "/filemanager", "--port", "8080", "--address", "0.0.0.0"]
+      - filebrowser_data:/database
+      - ./.filebrowser.json:/.filebrowser.json
     restart: unless-stopped
 
 volumes:
   mysql_data:
+  filebrowser_data:
